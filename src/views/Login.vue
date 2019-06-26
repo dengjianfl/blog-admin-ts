@@ -36,7 +36,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
-import Axios from 'axios';
+import { ajax } from '../api/http';
+import api  from '../api';
 
 @Component({
     components: {},
@@ -50,14 +51,13 @@ export default class Login extends Vue {
     }
 
     private login() {
-        Axios({
-            method: 'post',//指定请求方式
-            url: '/blog_front_api/user/login',
+        ajax({
+            url: api.login,
             data: {}
         }).then(res => {
             console.log(JSON.stringify(res));
         }).catch(err => {
-　　　　　　　　　　
+            console.log(JSON.stringify(err));
         });
 
     }
