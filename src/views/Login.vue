@@ -2,15 +2,15 @@
 	<div class="login">
         <div class="login-wrap">
             <h3>keep going</h3>
-            <el-form status-icon ref="ruleForm" label-width="50px" class="demo-ruleForm">
+            <el-form ref="ruleForm" label-width="50px" class="demo-ruleForm">
                 <el-form-item label="账号">
-                    <el-input type="password" autocomplete="off"></el-input>
+                    <el-input type="text" v-model="username"></el-input>
                 </el-form-item>
                 <el-form-item label="密码">
-                    <el-input type="password" autocomplete="off"></el-input>
+                    <el-input type="password" v-model="password"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button type="primary">登录</el-button>
+                    <el-button type="primary" @click="login">登录</el-button>
                     <el-button>注册</el-button>
                 </el-form-item>
             </el-form>
@@ -36,16 +36,42 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+import Axios from 'axios';
 
 @Component({
     components: {},
 })
 export default class Login extends Vue {
-    
+    data () {
+        return {
+            username: 'admin',
+            password: 12345
+        };
+    }
+
+    private login() {
+        Axios({
+            method: 'post',//指定请求方式
+            url: '/blog_front_api/user/login',
+            data: {}
+        }).then(res => {
+            console.log(JSON.stringify(res));
+        }).catch(err => {
+　　　　　　　　　　
+        });
+
+    }
 }
 </script>
 
 <style lang="scss" scoped>
+.login{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-image: url(../assets/image/login-bg.jpg);
+    background-size: 100%;
+}
 .login-wrap{
     position: fixed;
     left: 50%;

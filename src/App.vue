@@ -16,5 +16,12 @@ export default {
 </script>
 
 <style lang="scss">
- @import "./assets/scss/reset.scss";
+@import "./assets/scss/reset.scss";
+html,
+body,
+#app{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
 </style>
