@@ -6,12 +6,14 @@
                 <el-form-item label="账号">
                     <el-input type="text" v-model="username"></el-input>
                 </el-form-item>
+                <el-form-item label="手机">
+                    <el-input type="text" v-model="phone"></el-input>
+                </el-form-item>
                 <el-form-item label="密码">
                     <el-input type="password" v-model="password"></el-input>
                 </el-form-item>
-                <p><span  @click="register">没有账号？>></span></p>
                 <el-form-item>
-                    <el-button type="primary" size="medium" @click="login" class="login-btn">立即登录</el-button>
+                    <el-button type="primary" @click="register" class="register-btn">注册</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -42,29 +44,26 @@ import api from '../api';
 @Component({
     components: {},
 })
-export default class Login extends Vue {
+export default class Register extends Vue {
 
     private username: string = '';
+    private phone: string = '';
     private password: string = '';
-
     
-    private login() {
+
+    private register() {
         ajax({
-            url: api.login,
+            url: api.register,
             data: {
                 username: this.username,
+                phone: this.phone,
                 password: this.password
             }
         }).then(res => {
-            if (res.status !== 200) {
-                this.$message({message: res.msg, type: 'error'});
-            }
+            console.log(JSON.stringify(res));
         }).catch(err => {
             console.log(JSON.stringify(err));
         });
-    }
-    private register() {
-        this.$router.push('/register');
     }
 }
 </script>
@@ -97,17 +96,8 @@ export default class Login extends Vue {
         font-weight: bold;
         font-family:'Times New Roman', Times, serif;
     }
-    p{
-        text-align: right;
-        color: #409EFF;
-        font-size: 14px;
-        span{
-            cursor: pointer;
-        }
-    }
-    .login-btn{
+    .register-btn{
         width: 100%;
-        margin-top: 28px;
     }
 }
 </style>
