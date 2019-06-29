@@ -1,6 +1,6 @@
 <template>
     <div>
-        新增文章
+        新增文章页面
     </div>
 </template>
 
