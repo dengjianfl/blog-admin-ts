@@ -59,6 +59,7 @@ export default class Login extends Vue {
             if (res.status !== 200) {
                 this.$message({message: res.msg, type: 'error'});
             }
+            this.$router.push('/');
         }).catch(err => {
             console.log(JSON.stringify(err));
         });

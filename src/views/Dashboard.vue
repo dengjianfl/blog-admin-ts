@@ -94,6 +94,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { ajax } from '../api/http';
+import api from '../api';
 
 @Component({
     components: {
@@ -103,6 +105,21 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class Dashboard extends Vue {
     private name: string = 'admin';
     private role: string = '超级管理员';
+
+    public mounted() {
+        ajax({
+            url: api.test,
+            data: {
+                test: '111'
+            }
+        }).then(res => {
+            if (res.status !== 200) {
+                this.$message({message: res.msg, type: 'error'});
+            }
+        }).catch(err => {
+            console.log(JSON.stringify(err));
+        });
+    }
 }
 </script>
 
