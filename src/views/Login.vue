@@ -56,7 +56,7 @@ export default class Login extends Vue {
                 password: this.password
             }
         }).then(res => {
-            if (res.status !== 200) {
+            if (!res.isSuccess) {
                 this.$message({message: res.msg, type: 'error'});
             }
             this.$router.push('/');

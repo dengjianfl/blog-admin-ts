@@ -17,9 +17,7 @@ export const ajax = (req: any) => {
     }).then(res => {
         let resData = res.data;
         // 说明超时了
-        if (resData.status == 400) {
-            console.log('超市了，@@@@');
-            // Vue.$router.push('/login');
+        if (resData && resData.data.errorCode == '200') {
             location.href = '/login';
             return false;
         }
