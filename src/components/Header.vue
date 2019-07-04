@@ -27,7 +27,7 @@
           <img src="../assets/image/img.jpg">
         </div>
         <!-- 用户名下拉菜单 -->
-        <el-dropdown class="user-name" trigger="click">
+        <el-dropdown class="user-name" trigger="click" @command="handleCommand">
             <span class="el-dropdown-link">
                 {{username}} <i class="el-icon-caret-bottom"></i>
             </span>
@@ -50,6 +50,8 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import bus from '../common/bus';
+import { ajax } from '../api/http';
+import api from '../api';
 
 @Component
 export default class Header extends Vue {
@@ -92,6 +94,30 @@ export default class Header extends Vue {
         this.collapse = !this.collapse;
         bus.$emit('collapse', this.collapse);
     }
+
+    private handleCommand(command: String) {
+        if (command == 'loginout') {
+            // console.log('##$$');
+            this.logOut();
+        }
+    }
+
+    private logOut(){
+        ajax({
+            url: api.logOut,
+            data: {
+                token: sessionStorage.getItem('ssoClient')
+            }
+        }).then(res => {
+            if (!res.isSuccess) {
+                return this.$message({message: res.msg, type: 'error'});
+            }
+            this.$router.push('/login');
+        }).catch(err => {
+            console.log(JSON.stringify(err));
+        });
+    }
+
 }
 </script>
 

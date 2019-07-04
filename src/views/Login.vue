@@ -59,6 +59,7 @@ export default class Login extends Vue {
             if (!res.isSuccess) {
                 this.$message({message: res.msg, type: 'error'});
             }
+            sessionStorage.setItem('ssoClient', res.data);
             this.$router.push('/');
         }).catch(err => {
             console.log(JSON.stringify(err));

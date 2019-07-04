@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import Vue from 'vue';
 
 export const ajax = (req: any) => {
     return Axios.post(req.url, req.data, {
@@ -16,8 +15,8 @@ export const ajax = (req: any) => {
         }]
     }).then(res => {
         let resData = res.data;
-        // 说明超时了
-        if (resData && resData.data.errorCode == '200') {
+        // 说明超时了,这里如果不判断res.data  res.data.errorCode的话，就会报错进入catch
+        if (resData.data&&resData.data.errorCode&&resData.data.errorCode == '200') {
             location.href = '/login';
             return false;
         }

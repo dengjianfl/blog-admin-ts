@@ -103,23 +103,25 @@ import api from '../api';
     },
 })
 export default class Dashboard extends Vue {
-    private name: string = 'admin';
+    private name: string = '';
     private role: string = '超级管理员';
 
-    public mounted() {
+    private mounted() {
         ajax({
-            url: api.test,
+            url: api.getInfo,
             data: {
-                test: '111'
+                token: sessionStorage.getItem('ssoClient')
             }
         }).then(res => {
-            if (res.status !== 200) {
+            if (!res.isSuccess) {
                 this.$message({message: res.msg, type: 'error'});
             }
+            this.name = res.data.username;
         }).catch(err => {
             console.log(JSON.stringify(err));
         });
     }
+
 }
 </script>
 
