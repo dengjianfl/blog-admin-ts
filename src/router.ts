@@ -9,32 +9,44 @@ export default new Router({
     routes: [
         {
             path: '/',
-            redirect: '/dashboard'
+            redirect: '/dashboard',
+            name: 'dashboard'
         },
         {
             path: '/',
+            name: 'home',
             component: () => import('./views/Home.vue'),
             meta: { title: '自述文件' },
             children:[
                 {
                     path: '/dashboard',
                     component: () => import('./views/Dashboard.vue'),
-                    meta: { title: '系统首页' }
+                    name: 'dashboard',
+                    meta: { title: '系统首页', keepAlive: true }
                 },
                 {
                     path: '/articleList',
                     component: () => import('./views/ArticleList.vue'),
-                    meta: { title: '文章列表' }
+                    name: 'articleList',
+                    meta: { title: '文章列表', keepAlive: true }
                 },
                 {
                     path: '/addArticle',
                     component: () => import('./views/AddArticle.vue'),
-                    meta: { title: '新增文章' }
+                    name: 'addArticle',
+                    meta: { title: '新增文章', keepAlive: true }
+                },
+                {
+                    path: '/articleDetails',
+                    component: () => import('./views/ArticleDetails.vue'),
+                    name: 'articleDetails',
+                    meta: { title: '文章详情', keepAlive: false }
                 },
                 {
                     path: '/donate',
                     component: () => import('./views/Donate.vue'),
-                    meta: { title: '支持作者' }
+                    name: 'donate',
+                    meta: { title: '支持作者', keepAlive: true }
                 }
             ]
         },

@@ -7,8 +7,11 @@
             <div class="content">
                 <transition name="move" mode="out-in">
                     <keep-alive>
-                        <router-view></router-view>
+                        <router-view v-if="$route.meta.keepAlive"></router-view>
                     </keep-alive>
+                </transition>
+                <transition name="move" mode="out-in">
+                    <router-view v-if="!$route.meta.keepAlive"></router-view>
                 </transition>
             </div>
         </div>
