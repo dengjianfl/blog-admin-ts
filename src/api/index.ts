@@ -7,7 +7,10 @@ const api = {
     getArticleCategory: '/article/getArticleCategory.do', // 获取文章分类列表
     addAnArticle: '/article/addAnArticle.do', // 添加一篇文章
     getAllArticle: '/article/getAllArticle.do', // 获取文章列表
-    getAnArticle: '/article/getAnArticle.do', // 获取文章列表
+    getAnArticle: '/article/getAnArticle.do', // 获取一篇文章的详情
+    deleteAnArticle: '/article/deleteAnArticle.do', // 删除一篇文章
+
+    
 }
 
 export default api;

@@ -40,10 +40,11 @@
             <el-table-column
                 align="center"
                 label="操作"
-                width="100">
+                width="120">
                 <template slot-scope="scope">
                     <el-button @click="lookOver(scope.row.id)" type="text" size="small">查看</el-button>
                     <el-button @click="edit(scope.row)" type="text" size="small">编辑</el-button>
+                    <el-button @click="deleteAnArticle(scope.row.id)" type="text" size="small">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -115,13 +116,42 @@ export default class ArticleList extends Vue {
         return timestampToTime(val);
     }
 
+    // 查看
     private lookOver(id: any){
         sessionStorage.setItem('articleId', id);
         this.$router.push('/articleDetails');
     }
-
+    // 编辑
     private edit(){
         console.log('$##&**^$');
+    }
+    
+    // 删除
+    private deleteAnArticle(id: any) {
+        this.$confirm('此操作将永久删除该文章, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+        }).then(() => {
+          
+            ajax({
+            url: api.deleteAnArticle,
+            data: {
+                id
+            }
+        }).then(res => {
+            if (!res.isSuccess) {
+                this.$message({message: res.msg, type: 'error'});
+            }
+            // this.category = res.data;
+        }).catch(err => {
+            console.log(JSON.stringify(err));
+        });
+
+
+        }).catch(() => {
+                   
+        });
     }
 }
 </script>

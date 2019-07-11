@@ -2,6 +2,7 @@
     <div class="article-details">
         <h3>{{content.title}}</h3>
         <p>{{content.description}}</p>
+
         <div class="content" v-html="content.content"></div>
     </div>
 </template>
@@ -39,15 +40,22 @@ export default class ArticleDetails extends Vue {
 
 <style lang="scss" scoped>
 .article-details{
+    background-color: #fff;
+    padding: 10px 20px 30px;
+    border-radius: 8px;
     h3 {
-        height: 48px;
-        line-height: 48px;
-        font-size: 24px;
+        height: 44px;
+        line-height: 44px;
+        font-size: 20px;
     }
     p{
         height: 38px;
         line-height: 38px;
         font-size: 18px;
+        border-bottom: 1px dotted #ccc;
+    }
+    .content{
+        padding-top: 14px;
     }
 }
 </style>
